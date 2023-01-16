@@ -1,20 +1,26 @@
-(function($) {
+(function() {
 
-    if ( $('#edit-slug-buttons').length && $('#edit-slug-box').length )
-    {
+    let editSlugButtons = document.querySelector('#edit-slug-buttons');
+    let editSlugBox     = document.querySelector('#edit-slug-box');
+
+    if ( editSlugButtons && editSlugBox ) {
         // Add button.
-        $('#edit-slug-buttons').append( '<button type="button" class="js-reset-post-permalink button button-small" style="margin-left: 10px;">Reset Permalink</button>' );
+        let resetPermalinkButton = document.createElement('button');
+        resetPermalinkButton.innerHTML = 'Reset Permalink';
+        resetPermalinkButton.classList.add('js-reset-post-permalink', 'button', 'button-small');
+        resetPermalinkButton.style.marginLeft = '10px';
+        editSlugButtons.appendChild( resetPermalinkButton );
 
         // On click.
-        $('.js-reset-post-permalink').on( 'click', function ( event ) {
+        resetPermalinkButton.addEventListener('click', function ( event ) {
             // Prevent default.
             event.stopPropagation();
             event.preventDefault();
             // Empty post_name.
-            $('input[name="post_name"]').val('');
+            document.querySelector('input[name="post_name"]').value = '';
             // Display feedback.
-            $('#edit-slug-box').html( 'Done. Save the post to get the new permalink.' );
+            editSlugBox.innerHTML = 'Done. Save the post to get the new permalink.';
         });
     }
 
-})( jQuery );
+})();
